@@ -4,14 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Przekierowanie</title>
-</head>
-<body style="font-family:Arial;text-align:center;margin:40px;">
-  <h1>Strona edukacyjna</h1>
-  <p id="info">Ładuję link docelowy…</p>
-  <button id="go" style="display:none;padding:12px 18px;">Przejdź dalej</button>
-
   <script>
-    const params = new URLSearchParams(location.search);
+    // Pobranie parametru ?next z URL
+    const params = new URLSearchParams(window.location.search);
     const next = params.get('next');
 
     function isSafeUrl(u){
@@ -21,16 +16,19 @@
       } catch(e){ return false; }
     }
 
-    const info = document.getElementById('info');
-    const btn = document.getElementById('go');
-
-    if (!next) info.textContent = 'Brak parametru next';
-    else if (!isSafeUrl(next)) info.textContent = 'Nieprawidłowy link';
-    else {
-      info.innerHTML = 'Zostaniesz przekierowany na:<br><strong>' + next + '</strong>';
-      btn.style.display = 'inline-block';
-      btn.addEventListener('click', ()=> window.location.href = next);
+    if (next && isSafeUrl(next)) {
+      // Przekierowanie automatyczne po 2 sekundach
+      setTimeout(() => {
+        window.location.href = next;
+      }, 2000);
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.innerHTML = '<h1>Brak poprawnego parametru next</h1>';
+      });
     }
   </script>
+</head>
+<body>
+  <h1>loading...</h1>
 </body>
 </html>
